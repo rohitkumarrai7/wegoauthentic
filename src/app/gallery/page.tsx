@@ -35,8 +35,8 @@ const galleryImages = {
     { id: 8, src: '/images/gallery/festivals/festival-8.jpg', alt: 'Traditional Bhutanese festival' },
   ],
   groups: [
-    { id: 1, src: '/images/gallery/groups/group-1.jpg', alt: 'Group trip to Tigers Nest' },
-    { id: 2, src: '/images/gallery/groups/group-2.jpg', alt: 'Group exploring Bhutanese culture' },
+    { id: 1, src: 'https://assets.onecompiler.app/42vvzq69s/42y6f786y/group-1.jpg', alt: 'Group trip to Tigers Nest' },
+    { id: 2, src: 'https://assets.onecompiler.app/42vvzq69s/42y6f786y/group-2.jpg', alt: 'Group exploring Bhutanese culture' },
     { id: 3, src: '/images/gallery/groups/group-3.jpg', alt: 'Group at traditional festival' },
     { id: 4, src: '/images/gallery/groups/group-4.jpg', alt: 'Group hiking experience' },
     { id: 5, src: '/images/gallery/groups/group-5.jpg', alt: 'Group cultural immersion' },
