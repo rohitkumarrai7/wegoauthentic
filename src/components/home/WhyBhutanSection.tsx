@@ -26,7 +26,7 @@ const highlights = [
   {
     id: 1,
     title: "World's Only Carbon-Negative Country",
-    image: "/images/highlights/carbon-negative.jpg",
+    image: "/images/highlights/carbon-negative.JPG",
     description: "While most countries struggle with pollution, Bhutan absorbs more carbon than it produces! With 70% of its land covered in forests and strict environmental policies, it's one of the greenest places on Earth.",
     mediaType: "image",
   },
@@ -134,7 +134,8 @@ export const WhyBhutanSection = () => {
                             fill
                             className="object-cover"
                             quality={75}
-                            loading="lazy"
+                            loading={highlight.id <= 2 ? "eager" : "lazy"}
+                            priority={highlight.id <= 2}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                           {highlight.mediaType === "video" && (

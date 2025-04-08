@@ -64,10 +64,12 @@ export default function About() {
             <div className="w-full lg:w-1/2">
               <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="images\gallery\gallery-11.jpg"
+                  src="/images/gallery/gallery-11.jpg"
                   alt="We Go Authentic Story"
                   fill
                   className="object-cover"
+                  priority
+                  quality={80}
                 />
               </div>
             </div>
@@ -207,7 +209,7 @@ export default function About() {
             <div className="w-full lg:w-1/2">
               <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="images\gallery\adventures\adventure-4.jpg"
+                  src="/images/gallery/adventures/adventure-4.jpg"
                   alt="Local Bhutanese Experience"
                   fill
                   className="object-cover"

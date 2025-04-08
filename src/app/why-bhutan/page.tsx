@@ -8,7 +8,7 @@ const highlights = [
   {
     id: 1,
     title: "Bhutan is the world's only carbon-negative country!",
-    image: "/images/highlights/carbon-negative.jpg",
+    image: "/images/highlights/carbon-negative.JPG",
     description: "While most countries struggle with pollution, Bhutan absorbs more carbon than it produces! With 70% of its land covered in forests and strict environmental policies, it's one of the greenest places on Earth.",
     mediaType: "image"
   },
@@ -108,6 +108,8 @@ export default function WhyBhutan() {
                       alt={highlight.title}
                       fill
                       className="object-cover"
+                      priority={highlight.id <= 2}
+                      quality={80}
                     />
                     {highlight.mediaType === "video" && highlight.videoUrl && (
                       <Link href={highlight.videoUrl} target="_blank" className="absolute inset-0 flex items-center justify-center">

@@ -65,7 +65,7 @@ export default function Packages() {
       {/* Banner */}
       <section className="relative h-[40vh] md:h-[50vh]">
         <Image
-          src="images\gallery\gallery-1.jpg"
+          src="/images/gallery/gallery-1.jpg"
           alt="Bhutan Travel Packages"
           fill
           className="object-cover"
