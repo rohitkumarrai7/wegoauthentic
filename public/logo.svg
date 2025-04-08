@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="150" fill="red"/>
+
+  <!-- Text "WE" -->
+  <text x="150" y="60" text-anchor="middle" font-family="Arial" font-size="48" fill="white">WE</text>
+
+  <!-- Rectangle for "GO AUTHENTIC" -->
+  <rect x="85" y="75" width="130" height="40" fill="white"/>
+
+  <!-- Text "GO AUTHENTIC" -->
+  <text x="150" y="100" text-anchor="middle" font-family="Arial" font-size="16" fill="red" font-weight="bold">GO AUTHENTIC</text>
+</svg>
