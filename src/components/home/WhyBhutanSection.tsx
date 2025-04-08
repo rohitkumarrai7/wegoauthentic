@@ -48,7 +48,7 @@ const highlights = [
   {
     id: 4,
     title: "Sustainable Development Fee for Visitors",
-    image: "/images/highlights/sdf.JPG", // Changed filename to simpler version
+    image: "images/sdf-fee.jpg", // Changed filename to simpler version
     description: "To preserve its environment and culture, Bhutan charges a Sustainable Development Fee (SDF) per day for tourists. This keeps the country exclusive, less crowded, and incredibly authentic.",
     mediaType: "image",
   },
