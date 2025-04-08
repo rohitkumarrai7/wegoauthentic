@@ -4,36 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FiArrowRight } from 'react-icons/fi';
 
-const team = [
-  {
-    id: 1,
-    name: 'Dorji Wangchuk',
-    role: 'Lead Guide & Co-founder',
-    image: '/images/about/team-1.jpg',
-    bio: 'Born and raised in Thimphu, Dorji has been guiding travelers through Bhutan for over 10 years. His deep knowledge of Bhutanese culture, history, and hidden gems makes every journey special.',
-  },
-  {
-    id: 2,
-    name: 'Tashi Namgay',
-    role: 'Guide & Local Expert',
-    image: '/images/about/team-2.jpg',
-    bio: 'Tashi specializes in adventure travel and knows the mountain trails of Bhutan like the back of his hand. His passion for photography helps travelers capture the perfect memories.',
-  },
-  {
-    id: 3,
-    name: 'Amita Sharma',
-    role: 'Travel Coordinator & Co-founder',
-    image: '/images/about/team-3.jpg',
-    bio: 'Based in Mumbai, Amita handles all logistics and ensures your journey is smooth from start to finish. Her attention to detail and problem-solving skills are unmatched.',
-  },
-  {
-    id: 4,
-    name: 'Pema Lhamo',
-    role: 'Cultural Specialist',
-    image: '/images/about/team-4.jpg',
-    bio: 'Pema is our expert on Bhutanese festivals, traditions, and cuisine. She loves introducing travelers to authentic local experiences and connecting them with artisans and communities.',
-  },
-];
+
 
 export default function About() {
   return (
