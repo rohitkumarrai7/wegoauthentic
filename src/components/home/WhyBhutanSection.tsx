@@ -48,7 +48,7 @@ const highlights = [
   {
     id: 4,
     title: "Sustainable Development Fee for Visitors",
-    image: "images/sdf-fee.jpg", // Changed filename to simpler version
+    image: "images/sdf-fee.jpg",
     description: "To preserve its environment and culture, Bhutan charges a Sustainable Development Fee (SDF) per day for tourists. This keeps the country exclusive, less crowded, and incredibly authentic.",
     mediaType: "image",
   },
@@ -78,13 +78,6 @@ const highlights = [
 
 export const WhyBhutanSection = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-  const [imgError, setImgError] = useState<{[key: number]: boolean}>({});
-
-  // Function to handle image loading errors
-  const handleImageError = (id: number) => {
-    setImgError(prev => ({...prev, [id]: true}));
-    console.error(`Failed to load image for highlight ID: ${id}`);
-  };
 
   return (
     <section className="py-16 md:py-24 bg-gray-50">
@@ -135,27 +128,16 @@ export const WhyBhutanSection = () => {
                     <div className="h-full p-1">
                       <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
                         <div className="relative h-48 sm:h-52 md:h-56">
-                          {/* Using error handling with fallback image */}
-                          {imgError[highlight.id] ? (
-                            // Fallback to a standard img tag when Next.js Image fails
-                            <img
-                              src="/images/fallback-image.jpg" 
-                              alt={highlight.title}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <Image
-                              src={highlight.image}
-                              alt={highlight.title}
-                              fill
-                              className="object-cover"
-                              quality={75}
-                              loading={highlight.id <= 2 ? "eager" : "lazy"}
-                              priority={highlight.id <= 2}
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              onError={() => handleImageError(highlight.id)}
-                            />
-                          )}
+                          <Image
+                            src={highlight.image}
+                            alt={highlight.title}
+                            fill
+                            className="object-cover"
+                            quality={75}
+                            loading={highlight.id <= 2 ? "eager" : "lazy"}
+                            priority={highlight.id <= 2}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
                           {highlight.mediaType === "video" && (
                             <Dialog>
                               <DialogTrigger asChild>
