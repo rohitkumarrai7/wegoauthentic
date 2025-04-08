@@ -26,7 +26,7 @@ const highlights = [
   {
     id: 1,
     title: "World's Only Carbon-Negative Country",
-    image: "/images/highlights/carbon-negative.JPG",
+    image: "/images/highlights/carbon-negative.jpg",
     description: "While most countries struggle with pollution, Bhutan absorbs more carbon than it produces! With 70% of its land covered in forests and strict environmental policies, it's one of the greenest places on Earth.",
     mediaType: "image",
   },
@@ -48,7 +48,7 @@ const highlights = [
   {
     id: 4,
     title: "Sustainable Development Fee for Visitors",
-    image: "/images/highlights/sdf-fee.jpg",
+    image: "/images/highlights/sdf-fee.JPG",
     description: "To preserve its environment and culture, Bhutan charges a Sustainable Development Fee (SDF) per day for tourists. This keeps the country exclusive, less crowded, and incredibly authentic.",
     mediaType: "image",
   },

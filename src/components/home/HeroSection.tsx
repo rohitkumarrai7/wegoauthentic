@@ -17,17 +17,17 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    image: '/images/slides/bhutan-2.jpg',
+    image: '/images/slides/bhutan-1.jpg',
     alt: "Bhutan Landscape"
   },
   {
     id: 2,
-    image: '/images/slides/bhutan-3.PNG',
+    image: '/images/slides/bhutan-2.jpg',
     alt: "Bhutan Mountains"
   },
   {
     id: 3,
-    image: '/images/slides/bhutan-4.PNG',
+    image: '/images/slides/bhutan-3.jpg',
     alt: "Bhutan Cultural Experience"
   },
 ];

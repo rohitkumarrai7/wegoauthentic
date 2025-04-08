@@ -16,7 +16,7 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     minimumCacheTTL: 60,
-    unoptimized: true,
+    unoptimized: false,
   },
   swcMinify: true,
   compiler: {
