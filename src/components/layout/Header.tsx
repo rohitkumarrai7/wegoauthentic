@@ -51,6 +51,9 @@ export const Header = () => {
                 fill
                 className="object-contain"
                 priority
+                sizes="(max-width: 768px) 176px, 240px"
+                quality={90}
+                loading="eager"
               />
             </div>
           </Link>

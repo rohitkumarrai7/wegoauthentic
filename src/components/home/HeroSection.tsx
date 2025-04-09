@@ -40,39 +40,39 @@ export const HeroSection = () => {
   
   // Preload all images on component mount
   useEffect(() => {
-    // Preload all images in the background
-    slides.forEach((slide, index) => {
-      if (index !== currentSlide) { // Don't preload current slide as it's already loading
-        // Use DOM Image constructor rather than Next.js Image
-        const img = document.createElement('img');
-        img.src = slide.image;
-        
-        img.onload = () => {
-          setPreloadedImages(prev => new Set([...prev, index]));
-        };
-        
-        img.onerror = () => {
-          console.error(`Failed to load image: ${slide.image}`);
-          setImageErrors(prev => new Set([...prev, index]));
-        };
-      }
-    });
-  }, [currentSlide]); // Added currentSlide as dependency
+    const preloadImage = (src: string, index: number) => {
+      const img = new window.Image();
+      img.src = src;
+      
+      img.onload = () => {
+        setPreloadedImages(prev => new Set([...prev, index]));
+      };
+      
+      img.onerror = () => {
+        console.error(`Failed to load image: ${src}`);
+        setImageErrors(prev => new Set([...prev, index]));
+      };
+    };
 
-  // Set images as loaded after a short delay
+    // Preload next image
+    const nextIndex = (currentSlide + 1) % slides.length;
+    preloadImage(slides[nextIndex].image, nextIndex);
+
+    // Preload previous image
+    const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+    preloadImage(slides[prevIndex].image, prevIndex);
+  }, [currentSlide]);
+
+  // Set images as loaded immediately
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setImagesLoaded(true);
-    }, 50); // Reduced delay for faster initial display
-    
-    return () => clearTimeout(timer);
+    setImagesLoaded(true);
   }, []);
 
-  // Auto-advance slides with longer interval
+  // Auto-advance slides with optimized interval
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000); // Increased interval for better user experience
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
@@ -96,7 +96,7 @@ export const HeroSection = () => {
             initial={{ opacity: 0.4 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0.4 }}
-            transition={{ duration: 0.4 }} // Reduced transition duration
+            transition={{ duration: 0.4 }}
             className="h-full w-full relative"
           >
             {imagesLoaded ? (
@@ -105,17 +105,16 @@ export const HeroSection = () => {
                 alt={slides[currentSlide].alt}
                 fill
                 className="object-cover"
-                priority={true} // Always prioritize loading
+                priority={currentSlide === 0}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 100vw"
-                quality={60} // Reduced quality for faster loading
-                loading="eager" // Always eager load for hero section
+                quality={60}
+                loading={currentSlide === 0 ? "eager" : "lazy"}
                 placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                 onError={() => {
                   console.error(`Failed to load image: ${slides[currentSlide].image}`);
                   setImageErrors(prev => new Set([...prev, currentSlide]));
                 }}
-                unoptimized={true}
               />
             ) : (
               <div className="w-full h-full bg-bhutan-dark flex items-center justify-center">
@@ -155,7 +154,7 @@ export const HeroSection = () => {
             <Button
               size="lg"
               variant="default"
-              className="bg-bhutan-red text-white hover:bg-bhutan-red/90 hover:text-white rounded-full text-sm md:text-base py-2 md:py-6 px-4 md:px-8 h-auto shadow-md font-semibold"
+              className="bg-bhutan-red text-white hover:bg-bhutan-red/90 hover:text-white rounded-full text-sm md:text-base py-2 md:py-6 px-4 md:px-8 h-auto shadow-md font-semibold transform transition-transform hover:scale-105"
               onClick={scrollToTravelOptions}
             >
               <span className="text-white">BOOK NOW</span> <FiArrowRight className="ml-2" />

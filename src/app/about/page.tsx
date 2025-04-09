@@ -12,7 +12,7 @@ export default function About() {
       {/* Banner */}
       <section className="relative h-[40vh] md:h-[50vh]">
         <Image
-          src="images\gallery\gallery-1.jpg"
+          src="images\gallery\gallery-15.jpg"
           alt="About We Go Authentic"
           fill
           className="object-cover"
@@ -178,12 +178,14 @@ export default function About() {
             </div>
 
             <div className="w-full lg:w-1/2">
-              <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+              <div className="relative h-[400px] md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden shadow-xl">
                 <Image
                   src="/images/gallery/adventures/adventure-4.jpg"
                   alt="Local Bhutanese Experience"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={80}
                 />
               </div>
             </div>

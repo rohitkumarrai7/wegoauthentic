@@ -127,22 +127,24 @@ export const WhyBhutanSection = () => {
                   <CarouselItem key={highlight.id} className="sm:basis-1/2 md:basis-1/2 p-1">
                     <div className="h-full p-1">
                       <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
-                        <div className="relative h-48 sm:h-52 md:h-56">
+                        <div className="relative h-64 md:h-72 lg:h-80">
                           <Image
                             src={highlight.image}
                             alt={highlight.title}
                             fill
-                            className="object-cover"
-                            quality={75}
+                            className="object-cover rounded-lg"
+                            quality={60}
                             loading={highlight.id <= 2 ? "eager" : "lazy"}
                             priority={highlight.id <= 2}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                           />
                           {highlight.mediaType === "video" && (
                             <Dialog>
                               <DialogTrigger asChild>
-                                <button className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/50">
-                                  <div className="rounded-full bg-bhutan-red h-12 w-12 flex items-center justify-center">
+                                <button className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/50 rounded-lg">
+                                  <div className="rounded-full bg-bhutan-red h-12 w-12 flex items-center justify-center transform transition-transform hover:scale-110">
                                     <FiPlay className="text-white text-xl" />
                                   </div>
                                 </button>
@@ -150,9 +152,6 @@ export const WhyBhutanSection = () => {
                               <DialogContent className="sm:max-w-[725px]">
                                 <DialogHeader>
                                   <DialogTitle>{highlight.title}</DialogTitle>
-                                  <DialogDescription>
-                                    {highlight.description}
-                                  </DialogDescription>
                                 </DialogHeader>
                                 <div className="aspect-video w-full">
                                   <iframe
@@ -163,7 +162,7 @@ export const WhyBhutanSection = () => {
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen
-                                    className="w-full h-full"
+                                    className="w-full h-full rounded-lg"
                                   ></iframe>
                                 </div>
                               </DialogContent>
@@ -173,10 +172,10 @@ export const WhyBhutanSection = () => {
                         <div className="p-4 flex flex-col flex-grow">
                           <h3 className="font-bold text-lg text-bhutan-dark mb-2">{highlight.title}</h3>
                           <div className="text-gray-700 text-sm flex-grow">
-                            <p className="mb-1">{highlight.mediaType === "image" ? "🏞️" : "🎥"}
-                              {highlight.mediaType === "image" ? " Photo:" : " VIDEO:"} {highlight.title}
+                            <p className="mb-1">
+                              {highlight.title}
                             </p>
-                            <p>✍️ Description: {highlight.description}</p>
+                            <p>{highlight.description}</p>
                           </div>
                         </div>
                       </div>

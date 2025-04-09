@@ -102,7 +102,7 @@ export default function WhyBhutan() {
                 className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}
               >
                 <div className="w-full md:w-1/2">
-                  <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
+                  <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden shadow-lg">
                     <Image
                       src={highlight.image}
                       alt={highlight.title}
@@ -125,9 +125,9 @@ export default function WhyBhutan() {
                   <h3 className="text-2xl font-bold text-bhutan-dark mb-4">{highlight.title}</h3>
                   <div className="text-gray-700 space-y-3">
                     <p className="mb-2">
-                      {highlight.mediaType === "image" ? "🏞️" : "🎥"} {highlight.mediaType === "image" ? "Photo:" : "VIDEO:"} {highlight.title}
+                      {highlight.title}
                     </p>
-                    <p className="text-lg">✍️ Description: {highlight.description}</p>
+                    <p className="text-lg">{highlight.description}</p>
                   </div>
                 </div>
               </div>
