@@ -13,7 +13,7 @@ const packages = [
     image: '/images/packages/group-trip.jpg',
     description: "Experience the best of Bhutan on our carefully curated 7-day group adventure. Make new friends while exploring Bhutan's breathtaking landscapes and rich culture.",
     highlights: [
-      'Fixed departure every Tuesday',
+      'Fixed departure every Saturday',
       'Includes all accommodations & transportation',
       'Expert local guides',
     ]
@@ -92,16 +92,20 @@ export default function Packages() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {packages.map((pkg) => (
-              <div key={pkg.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div
+                key={pkg.id}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:border-bhutan-red group"
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="relative h-[250px]">
                   <Image
                     src={pkg.image}
                     alt={pkg.title}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:brightness-90 transition duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className={`inline-block py-1 px-3 rounded-full text-xs font-semibold ${pkg.type === 'Group Trip' ? 'bg-bhutan-red text-white' : 'bg-bhutan-yellow text-bhutan-dark'}`}>
+                    <span className={`inline-block py-1 px-3 rounded-full text-xs font-semibold ${pkg.type === 'Group Trip' ? 'bg-bhutan-red text-white' : 'bg-bhutan-yellow text-bhutan-dark'} shadow-md group-hover:scale-110 transition-transform duration-300`}>
                       {pkg.type}
                     </span>
                   </div>
@@ -109,15 +113,15 @@ export default function Packages() {
 
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-bhutan-dark">{pkg.title}</h3>
+                    <h3 className="text-xl font-bold text-bhutan-dark group-hover:text-bhutan-red transition-colors duration-300">{pkg.title}</h3>
                     <span className="text-lg font-bold text-bhutan-red">{pkg.price}</span>
                   </div>
 
-                  <p className="text-gray-700 mb-4">{pkg.description}</p>
+                  <p className="text-gray-700 mb-4 group-hover:text-bhutan-dark/80 transition-colors duration-300">{pkg.description}</p>
 
                   <ul className="mb-6 space-y-2">
                     {pkg.highlights.map((highlight, index) => (
-                      <li key={index} className="flex items-center text-gray-700">
+                      <li key={index} className="flex items-center text-gray-700 group-hover:text-bhutan-red transition-colors duration-300">
                         <span className="inline-block h-2 w-2 rounded-full bg-bhutan-red mr-2"></span>
                         {highlight}
                       </li>
@@ -125,7 +129,7 @@ export default function Packages() {
                   </ul>
 
                   <Link href={`/packages/${pkg.id}`}>
-                    <Button className="w-full bg-bhutan-red text-white hover:bg-bhutan-red/90">
+                    <Button className="w-full bg-bhutan-red text-white hover:bg-bhutan-yellow hover:text-bhutan-dark font-bold shadow-md transition-all duration-300">
                       View Details <FiArrowRight className="ml-2" />
                     </Button>
                   </Link>

@@ -152,7 +152,7 @@ export const TravelOptionsSection = () => {
               <ul className="mt-4 space-y-2 text-gray-700">
                 <li className="flex items-center">
                   <span className="inline-block h-2 w-2 rounded-full bg-bhutan-red mr-2"></span>
-                  Fixed departure every Tuesday
+                  Fixed departure every Saturday
                 </li>
                 <li className="flex items-center">
                   <span className="inline-block h-2 w-2 rounded-full bg-bhutan-red mr-2"></span>

@@ -6,161 +6,130 @@ import { Button } from '@/components/ui/button';
 import { FiArrowRight } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Slide {
-  id: number;
-  image: string;
-  fallback?: string;
-  alt: string;
-}
-
-// Reduced number of slides to improve performance
-const slides: Slide[] = [
+const slides = [
   {
     id: 1,
     image: '/images/slides/bhutan-1.jpg',
-    alt: "Bhutan Landscape"
+    alt: 'Bhutan Landscape'
   },
   {
     id: 2,
     image: '/images/slides/bhutan-2.jpg',
-    alt: "Bhutan Mountains"
+    alt: 'Bhutan Mountains'
   },
   {
     id: 3,
     image: '/images/slides/bhutan-3.jpg',
-    alt: "Bhutan Cultural Experience"
+    alt: 'Bhutan Culture'
   },
 ];
+
+const textVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.3, duration: 0.8, ease: 'easeOut' }
+  }),
+};
 
 export const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [preloadedImages, setPreloadedImages] = useState<Set<number>>(new Set());
-  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
-  
-  // Preload all images on component mount
-  useEffect(() => {
-    const preloadImage = (src: string, index: number) => {
-      const img = new window.Image();
-      img.src = src;
-      
-      img.onload = () => {
-        setPreloadedImages(prev => new Set([...prev, index]));
-      };
-      
-      img.onerror = () => {
-        console.error(`Failed to load image: ${src}`);
-        setImageErrors(prev => new Set([...prev, index]));
-      };
-    };
 
-    // Preload next image
-    const nextIndex = (currentSlide + 1) % slides.length;
-    preloadImage(slides[nextIndex].image, nextIndex);
-
-    // Preload previous image
-    const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-    preloadImage(slides[prevIndex].image, prevIndex);
-  }, [currentSlide]);
-
-  // Set images as loaded immediately
   useEffect(() => {
     setImagesLoaded(true);
   }, []);
 
-  // Auto-advance slides with optimized interval
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000);
+    }, 9000);
     return () => clearInterval(interval);
   }, []);
 
   const scrollToTravelOptions = () => {
-    const travelOptionsSection = document.getElementById('travel-options');
-    if (travelOptionsSection) {
-      travelOptionsSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    const section = document.getElementById('travel-options');
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section 
-      id="hero" 
-      className="relative h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-screen w-full overflow-hidden"
-    >
-      {/* Dynamic Slideshow - Simplified */}
-      <div className="absolute inset-0">
-        <AnimatePresence initial={false}>
+    <section className="relative h-screen w-full overflow-hidden" id="hero">
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={currentSlide}
+          className="absolute inset-0"
+          initial={{ clipPath: 'circle(0% at 50% 50%)', scale: 1.2 }}
+          animate={{ clipPath: 'circle(150% at 50% 50%)', scale: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 1.8, ease: 'easeInOut' }}
+        >
+          <Image
+            src={slides[currentSlide].image}
+            alt={slides[currentSlide].alt}
+            fill
+            className="object-cover"
+            priority={true}
+          />
           <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0.4 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0.4 }}
-            transition={{ duration: 0.4 }}
-            className="h-full w-full relative"
+            className="absolute inset-0"
+            initial={{ scale: 1 }}
+            animate={{ scale: 1.1 }}
+            transition={{ duration: 20, ease: 'linear' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-transparent z-10" />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Overlay Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-20 text-white px-6 text-center">
+        <motion.h1
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-xl"
+          variants={textVariants}
+          initial="hidden"
+          animate="visible"
+          custom={1}
+        >
+          Discover the <span className="text-bhutan-red">LAND OF THE THUNDER DRAGON</span>
+        </motion.h1>
+
+        <motion.p
+          className="mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-white/90 drop-shadow-md"
+          variants={textVariants}
+          initial="hidden"
+          animate="visible"
+          custom={2}
+        >
+          Explore Bhutan’s untouched culture, breathtaking valleys, and soul-refreshing peace.
+        </motion.p>
+
+        <motion.div
+          variants={textVariants}
+          initial="hidden"
+          animate="visible"
+          custom={3}
+          className="mt-6"
+        >
+          <Button
+            size="lg"
+            className="bg-bhutan-red text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform"
+            onClick={scrollToTravelOptions}
           >
-            {imagesLoaded ? (
-              <Image
-                src={slides[currentSlide].image}
-                alt={slides[currentSlide].alt}
-                fill
-                className="object-cover"
-                priority={currentSlide === 0}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 100vw"
-                quality={60}
-                loading={currentSlide === 0 ? "eager" : "lazy"}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-                onError={() => {
-                  console.error(`Failed to load image: ${slides[currentSlide].image}`);
-                  setImageErrors(prev => new Set([...prev, currentSlide]));
-                }}
-              />
-            ) : (
-              <div className="w-full h-full bg-bhutan-dark flex items-center justify-center">
-                <div className="animate-pulse w-12 h-12 rounded-full bg-bhutan-red"></div>
-              </div>
-            )}
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent" />
-          </motion.div>
-        </AnimatePresence>
+            Book Now <FiArrowRight className="ml-2" />
+          </Button>
+        </motion.div>
       </div>
 
-      {/* Simplified Slide indicators */}
-      <div className="absolute bottom-4 md:bottom-6 left-0 right-0 flex justify-center space-x-2 z-20 px-4">
+      {/* Slide Indicators */}
+      <div className="absolute bottom-6 left-0 right-0 z-30 flex justify-center gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
-            className={`h-2 rounded-full transition-all ${
-              currentSlide === index ? "w-8 bg-white" : "w-2 bg-white/50"
-            }`}
+            className={`h-2 rounded-full transition-all ${currentSlide === index ? "w-8 bg-white" : "w-2 bg-white/50"}`}
             onClick={() => setCurrentSlide(index)}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
-      </div>
-
-      {/* Text content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 px-4 md:px-8">
-        <div className="max-w-4xl">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-lg leading-tight">
-            Welcome to the <span className="text-bhutan-red">LAND OF THE THUNDER DRAGON</span>
-          </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 md:mb-8 max-w-2xl mx-auto text-white/90 drop-shadow">
-            Experience the authentic beauty, culture, and traditions of Bhutan
-          </p>
-          <div className="inline-block">
-            <Button
-              size="lg"
-              variant="default"
-              className="bg-bhutan-red text-white hover:bg-bhutan-red/90 hover:text-white rounded-full text-sm md:text-base py-2 md:py-6 px-4 md:px-8 h-auto shadow-md font-semibold transform transition-transform hover:scale-105"
-              onClick={scrollToTravelOptions}
-            >
-              <span className="text-white">BOOK NOW</span> <FiArrowRight className="ml-2" />
-            </Button>
-          </div>
-        </div>
       </div>
     </section>
   );

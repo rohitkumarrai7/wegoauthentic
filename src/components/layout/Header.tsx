@@ -64,7 +64,7 @@ export const Header = () => {
               <Link
                 key={item.name}
                 href={item.path}
-                className={`font-medium text-sm hover:text-bhutan-red transition-colors ${isScrolled ? 'text-bhutan-dark' : 'text-white'}`}
+                className={`font-medium text-sm transition-base hover-underline ${isScrolled ? 'text-bhutan-dark' : 'text-white'} hover:text-bhutan-red`}
               >
                 {item.name}
               </Link>
@@ -74,7 +74,7 @@ export const Header = () => {
               <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="outline"
-                  className={`rounded-full ${
+                  className={`rounded-full btn-animate ${
                     isScrolled 
                       ? 'border-bhutan-red text-bhutan-red hover:bg-bhutan-red hover:text-white' 
                       : 'border-white text-white bg-transparent hover:bg-white hover:text-bhutan-red'

@@ -70,7 +70,7 @@ export const Footer = () => {
                 href="https://www.instagram.com/we.goauthentic/?igsh=MWdxYTRwZmNtOHh1MQ%3D%3D&utm_source=qr#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-bhutan-red transition-colors"
+                className="text-white hover:text-bhutan-red transition-base"
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -80,7 +80,7 @@ export const Footer = () => {
                 href="https://youtube.com/@wegoauthentic?feature=shared"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-bhutan-red transition-colors"
+                className="text-white hover:text-bhutan-red transition-base"
                 whileHover={{ scale: 1.2, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -103,7 +103,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/packages/5-days-4-nights"
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-gray-300 hover:text-white hover-underline transition-base"
                 >
                   5 Days 4 Nights
                 </Link>

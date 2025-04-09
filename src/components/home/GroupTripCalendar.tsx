@@ -6,53 +6,53 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FiArrowRight, FiCalendar, FiCheck } from 'react-icons/fi';
 
-// Generate dates for upcoming Tuesdays
-const getUpcomingTuesdays = (count: number) => {
-  const tuesdays = [];
+// Generate dates for upcoming Saturdays
+const getUpcomingSaturdays = (count: number) => {
+  const saturdays = [];
   const today = new Date();
   let date = new Date(today);
 
-  // Find next Tuesday
-  while (date.getDay() !== 2) { // 2 is Tuesday
+  // Find next Saturday
+  while (date.getDay() !== 6) { // 6 is Saturday
     date.setDate(date.getDate() + 1);
   }
 
-  // Get the requested number of Tuesdays
+  // Get the requested number of Saturdays
   for (let i = 0; i < count; i++) {
-    const tuesdayDate = new Date(date);
-    tuesdays.push({
-      date: tuesdayDate,
-      formattedDate: tuesdayDate.toLocaleDateString('en-US', {
+    const saturdayDate = new Date(date);
+    saturdays.push({
+      date: saturdayDate,
+      formattedDate: saturdayDate.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'
       }),
-      month: tuesdayDate.getMonth(),
-      monthName: tuesdayDate.toLocaleDateString('en-US', { month: 'long' }),
+      month: saturdayDate.getMonth(),
+      monthName: saturdayDate.toLocaleDateString('en-US', { month: 'long' }),
       status: i < 3 ? 'booking' : i < 5 ? 'limited' : 'available',
       spotsLeft: i < 3 ? Math.floor(Math.random() * 3) + 1 : i < 5 ? Math.floor(Math.random() * 5) + 3 : 8
     });
 
-    // Move to next Tuesday
+    // Move to next Saturday
     date.setDate(date.getDate() + 7);
   }
 
-  return tuesdays;
+  return saturdays;
 };
 
 export const GroupTripCalendar = () => {
-  const [upcomingTuesdays, setUpcomingTuesdays] = useState<any[]>([]);
+  const [upcomingSaturdays, setUpcomingSaturdays] = useState<any[]>([]);
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
   const [uniqueMonths, setUniqueMonths] = useState<{ month: number, name: string }[]>([]);
 
   // Refresh the calendar data
   useEffect(() => {
-    const tuesdayData = getUpcomingTuesdays(12);
-    setUpcomingTuesdays(tuesdayData);
+    const saturdayData = getUpcomingSaturdays(12);
+    setUpcomingSaturdays(saturdayData);
 
     // Get unique months
     const months = Array.from(
-      new Set(tuesdayData.map(tuesday => tuesday.month))
+      new Set(saturdayData.map(saturday => saturday.month))
     ).map(month => ({
       month,
       name: new Date(new Date().getFullYear(), month).toLocaleDateString('en-US', { month: 'long' })
@@ -61,10 +61,10 @@ export const GroupTripCalendar = () => {
     setUniqueMonths(months);
   }, []);
 
-  // Filter tuesdays by selected month
-  const filteredTuesdays = selectedMonth !== null
-    ? upcomingTuesdays.filter(tuesday => tuesday.month === selectedMonth)
-    : upcomingTuesdays;
+  // Filter saturdays by selected month
+  const filteredSaturdays = selectedMonth !== null
+    ? upcomingSaturdays.filter(saturday => saturday.month === selectedMonth)
+    : upcomingSaturdays;
 
   return (
     <section className="py-16 md:py-24 bg-white">
@@ -86,7 +86,7 @@ export const GroupTripCalendar = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Join our weekly Tuesday departures for the 7-day Bhutan adventure.
+            Join our weekly Saturday departures for the 7-day Bhutan adventure.
             Book your spot and experience the magic of Bhutan with like-minded travelers.
           </motion.p>
         </div>
@@ -116,64 +116,65 @@ export const GroupTripCalendar = () => {
 
         {/* Calendar grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-          {filteredTuesdays.map((tuesday, index) => (
+          {filteredSaturdays.map((saturday, index) => (
             <motion.div
-              key={tuesday.formattedDate}
-              className={`rounded-lg shadow-md overflow-hidden border ${
-                tuesday.status === 'booking'
+              key={saturday.formattedDate}
+              className={`rounded-2xl shadow-lg overflow-hidden border transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group
+                ${saturday.status === 'booking'
                   ? 'border-red-500'
-                  : tuesday.status === 'limited'
+                  : saturday.status === 'limited'
                     ? 'border-yellow-500'
-                    : 'border-green-500'
-              }`}
+                    : 'border-green-500'}
+              `}
+              style={{ cursor: 'pointer' }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
               <div className={`p-1 md:p-2 text-white text-center ${
-                tuesday.status === 'booking'
+                saturday.status === 'booking'
                   ? 'bg-red-500'
-                  : tuesday.status === 'limited'
+                  : saturday.status === 'limited'
                     ? 'bg-yellow-500'
                     : 'bg-green-500'
               }`}>
                 <div className="text-xs md:text-sm font-medium">
-                  {tuesday.status === 'booking'
+                  {saturday.status === 'booking'
                     ? 'Booking Fast!'
-                    : tuesday.status === 'limited'
+                    : saturday.status === 'limited'
                       ? 'Limited Seats'
                       : 'Available'}
                 </div>
               </div>
-              <div className="p-3 md:p-6">
+              <div className="p-3 md:p-6 bg-white group-hover:bg-bhutan-yellow/10 transition-colors duration-300">
                 <div className="flex items-center justify-center mb-2 md:mb-4">
                   <FiCalendar className="text-bhutan-red text-lg md:text-xl mr-2" />
-                  <span className="font-bold text-sm md:text-lg">{tuesday.formattedDate}</span>
+                  <span className="font-bold text-sm md:text-lg group-hover:text-bhutan-red transition-colors duration-300">{saturday.formattedDate}</span>
                 </div>
                 <div className="text-center mb-2 md:mb-4">
-                  <span className="text-gray-600 text-xs md:text-sm">Group Trip: 7 Days 6 Nights</span>
+                  <span className="text-gray-600 text-xs md:text-sm group-hover:text-bhutan-dark transition-colors duration-300">Group Trip: 7 Days 6 Nights</span>
                 </div>
                 <ul className="space-y-1 md:space-y-2 mb-3 md:mb-6 text-xs md:text-sm">
                   <li className="flex items-start">
                     <FiCheck className="text-green-500 mt-0.5 mr-1 md:mr-2 flex-shrink-0" />
-                    <span>All-inclusive package</span>
+                    <span className="group-hover:text-bhutan-red transition-colors duration-300">All-inclusive package</span>
                   </li>
                   <li className="flex items-start">
                     <FiCheck className="text-green-500 mt-0.5 mr-1 md:mr-2 flex-shrink-0" />
-                    <span>English speaking guide</span>
+                    <span className="group-hover:text-bhutan-red transition-colors duration-300">English speaking guide</span>
                   </li>
                   <li className="flex items-start">
                     <FiCheck className="text-green-500 mt-0.5 mr-1 md:mr-2 flex-shrink-0" />
-                    <span>{tuesday.spotsLeft} spots left</span>
+                    <span className="group-hover:text-bhutan-red transition-colors duration-300">{saturday.spotsLeft} spots left</span>
                   </li>
                 </ul>
                 <div className="flex-shrink-0">
                   <Link href="/packages/group-trip">
                     <Button 
-                      className="bg-bhutan-red text-white hover:bg-bhutan-red/90 px-4 py-2 text-sm md:text-base rounded-md flex items-center font-semibold"
+                      className="bg-bhutan-red text-white hover:bg-bhutan-yellow hover:text-bhutan-dark font-bold shadow-md transition-all duration-300 px-4 py-2 text-sm md:text-base rounded-md flex items-center font-semibold"
                     >
-                      <span className="text-white">Book Now</span> <FiArrowRight className="ml-1 md:ml-2" />
+                      <span className="text-white group-hover:text-bhutan-dark transition-colors duration-300">Book Now</span> <FiArrowRight className="ml-1 md:ml-2" />
                     </Button>
                   </Link>
                 </div>

@@ -174,3 +174,43 @@ body {
     }
   }
 }
+
+@layer components {
+  /* Smooth transitions for all interactive elements */
+  .transition-base {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  .hover-scale {
+    @apply transform hover:scale-105;
+  }
+  .hover-shadow {
+    @apply hover:shadow-2xl;
+  }
+  .hover-underline {
+    @apply hover:underline underline-offset-4;
+  }
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-bhutan-red/70 focus:ring-offset-2;
+  }
+  .card-animate {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-bhutan-red;
+  }
+  .btn-animate {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+  .input-animate {
+    @apply transition-all duration-200 focus:ring-2 focus:ring-bhutan-red/70 focus:border-bhutan-red;
+  }
+  .section-fade {
+    @apply opacity-0 translate-y-8;
+    animation: sectionFadeIn 0.8s forwards;
+  }
+  @keyframes sectionFadeIn {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Animate all sections on scroll (for JS frameworks, add 'section-fade' class dynamically) */
