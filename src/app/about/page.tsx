@@ -12,7 +12,7 @@ export default function About() {
       {/* Banner */}
       <section className="relative h-[40vh] md:h-[50vh]">
         <Image
-          src="images\gallery\gallery-15.jpg"
+          src="/images/gallery/gallery-15.jpg"
           alt="About We Go Authentic"
           fill
           className="object-cover"
@@ -35,7 +35,7 @@ export default function About() {
             <div className="w-full lg:w-1/2">
               <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="https://assets.onecompiler.app/42vvzq69s/42y6f786y/gallery-11.jpg"
+                  src="/images/gallery/gallery-11.jpg"
                   alt="We Go Authentic Story"
                   fill
                   className="object-cover"

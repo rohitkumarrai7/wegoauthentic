@@ -14,13 +14,13 @@ const slides = [
   },
   {
     id: 2,
-    image: '/images/slides/bhutan-2.jpg',
-    alt: 'Bhutan Mountains'
+    image: '/images/slides/bhutan-3.jpg',
+    alt: "Bhutan Mountains"
   },
   {
     id: 3,
-    image: '/images/slides/bhutan-3.jpg',
-    alt: 'Bhutan Culture'
+    image: '/images/slides/bhutan-4.jpg',
+    alt: "Bhutan Cultural Experience"
   },
 ];
 
