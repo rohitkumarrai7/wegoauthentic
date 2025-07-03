@@ -55,10 +55,10 @@ export const GroupTripCalendar = () => {
       new Set(saturdayData.map(saturday => saturday.month))
     ).map(month => ({
       month,
-      name: new Date(new Date().getFullYear(), month).toLocaleDateString('en-US', { month: 'long' })
+      name: new Date(new Date().getFullYear(), month as number).toLocaleDateString('en-US', { month: 'long' })
     }));
 
-    setUniqueMonths(months);
+    setUniqueMonths(months as { month: number, name: string }[]);
   }, []);
 
   // Filter saturdays by selected month
@@ -119,13 +119,13 @@ export const GroupTripCalendar = () => {
           {filteredSaturdays.map((saturday, index) => (
             <motion.div
               key={saturday.formattedDate}
-              className={`rounded-2xl shadow-lg overflow-hidden border transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group
-                ${saturday.status === 'booking'
+              className={`rounded-lg shadow-md overflow-hidden border ${
+                saturday.status === 'booking'
                   ? 'border-red-500'
                   : saturday.status === 'limited'
                     ? 'border-yellow-500'
-                    : 'border-green-500'}
-              `}
+                    : 'border-green-500'
+              }`}
               style={{ cursor: 'pointer' }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -150,7 +150,7 @@ export const GroupTripCalendar = () => {
               <div className="p-3 md:p-6 bg-white group-hover:bg-bhutan-yellow/10 transition-colors duration-300">
                 <div className="flex items-center justify-center mb-2 md:mb-4">
                   <FiCalendar className="text-bhutan-red text-lg md:text-xl mr-2" />
-                  <span className="font-bold text-sm md:text-lg group-hover:text-bhutan-red transition-colors duration-300">{saturday.formattedDate}</span>
+                  <span className="font-bold text-sm md:text-lg">{saturday.formattedDate}</span>
                 </div>
                 <div className="text-center mb-2 md:mb-4">
                   <span className="text-gray-600 text-xs md:text-sm group-hover:text-bhutan-dark transition-colors duration-300">Group Trip: 7 Days 6 Nights</span>
@@ -166,7 +166,7 @@ export const GroupTripCalendar = () => {
                   </li>
                   <li className="flex items-start">
                     <FiCheck className="text-green-500 mt-0.5 mr-1 md:mr-2 flex-shrink-0" />
-                    <span className="group-hover:text-bhutan-red transition-colors duration-300">{saturday.spotsLeft} spots left</span>
+                    <span>{saturday.spotsLeft} spots left</span>
                   </li>
                 </ul>
                 <div className="flex-shrink-0">
