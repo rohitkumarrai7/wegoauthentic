@@ -126,13 +126,13 @@ export const WhyBhutanSection = () => {
                 {highlights.map((highlight) => (
                   <CarouselItem key={highlight.id} className="sm:basis-1/2 md:basis-1/2 p-1">
                     <div className="h-full p-1">
-                      <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
+                      <div className="bg-white rounded-xl shadow-md overflow-hidden h-full flex flex-col transition-all duration-300 group hover:scale-105 hover:shadow-2xl hover:border-bhutan-red border border-transparent">
                         <div className="relative h-64 md:h-72 lg:h-80">
                           <Image
                             src={highlight.image}
                             alt={highlight.title}
                             fill
-                            className="object-cover rounded-lg"
+                            className="object-cover rounded-lg group-hover:brightness-90 transition-all duration-300"
                             quality={60}
                             loading={highlight.id <= 2 ? "eager" : "lazy"}
                             priority={highlight.id <= 2}
@@ -144,7 +144,7 @@ export const WhyBhutanSection = () => {
                             <Dialog>
                               <DialogTrigger asChild>
                                 <button className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/50 rounded-lg">
-                                  <div className="rounded-full bg-bhutan-red h-12 w-12 flex items-center justify-center transform transition-transform hover:scale-110">
+                                  <div className="rounded-full bg-bhutan-red h-12 w-12 flex items-center justify-center transform transition-transform group-hover:scale-110">
                                     <FiPlay className="text-white text-xl" />
                                   </div>
                                 </button>
@@ -170,7 +170,7 @@ export const WhyBhutanSection = () => {
                           )}
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
-                          <h3 className="font-bold text-lg text-bhutan-dark mb-2">{highlight.title}</h3>
+                          <h3 className="font-bold text-lg text-bhutan-dark mb-2 group-hover:text-bhutan-red transition-colors duration-300">{highlight.title}</h3>
                           <div className="text-gray-700 text-sm flex-grow">
                             <p className="mb-1">
                               {highlight.title}

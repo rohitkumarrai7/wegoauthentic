@@ -119,26 +119,19 @@ export const GroupTripCalendar = () => {
           {filteredSaturdays.map((saturday, index) => (
             <motion.div
               key={saturday.formattedDate}
-              className={`rounded-lg shadow-md overflow-hidden border ${
-                saturday.status === 'booking'
-                  ? 'border-red-500'
-                  : saturday.status === 'limited'
-                    ? 'border-yellow-500'
-                    : 'border-green-500'
-              }`}
-              style={{ cursor: 'pointer' }}
+              className={`group rounded-xl shadow-md overflow-hidden border transition-all duration-300 cursor-pointer 
+                ${saturday.status === 'booking' ? 'border-red-500' : saturday.status === 'limited' ? 'border-yellow-500' : 'border-green-500'}
+                hover:scale-105 hover:shadow-2xl hover:border-bhutan-red`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <div className={`p-1 md:p-2 text-white text-center ${
-                saturday.status === 'booking'
-                  ? 'bg-red-500'
-                  : saturday.status === 'limited'
-                    ? 'bg-yellow-500'
-                    : 'bg-green-500'
-              }`}>
+              <div className={`p-1 md:p-2 text-white text-center transition-colors duration-300 
+                ${saturday.status === 'booking' ? 'bg-red-500 group-hover:bg-bhutan-red' : 
+                  saturday.status === 'limited' ? 'bg-yellow-500 group-hover:bg-bhutan-yellow' : 
+                  'bg-green-500 group-hover:bg-bhutan-dark'}
+              `}>
                 <div className="text-xs md:text-sm font-medium">
                   {saturday.status === 'booking'
                     ? 'Booking Fast!'
@@ -172,7 +165,7 @@ export const GroupTripCalendar = () => {
                 <div className="flex-shrink-0">
                   <Link href="/packages/group-trip">
                     <Button 
-                      className="bg-bhutan-red text-white hover:bg-bhutan-yellow hover:text-bhutan-dark font-bold shadow-md transition-all duration-300 px-4 py-2 text-sm md:text-base rounded-md flex items-center font-semibold"
+                      className="bg-bhutan-red text-white hover:bg-bhutan-yellow hover:text-bhutan-dark font-bold shadow-md transition-all duration-300 px-4 py-2 text-sm md:text-base rounded-md flex items-center font-semibold group-hover:scale-105 group-hover:shadow-lg"
                     >
                       <span className="text-white group-hover:text-bhutan-dark transition-colors duration-300">Book Now</span> <FiArrowRight className="ml-1 md:ml-2" />
                     </Button>
