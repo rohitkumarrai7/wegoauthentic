@@ -35,7 +35,7 @@ export default function About() {
             <div className="w-full lg:w-1/2">
               <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                 <Image
-                  src="/images/gallery/gallery-11.JPG"
+                  src="/images/gallery/gallery-11.jpg"
                   alt="We Go Authentic Story"
                   fill
                   className="object-cover"
