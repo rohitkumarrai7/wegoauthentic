@@ -18,7 +18,7 @@ const highlights = [
     image: "/images/highlights/no-traffic-lights.jpg",
     description: "Forget traffic jams! Bhutan's capital, Thimphu, is one of the only capitals in the world without a single traffic light. Instead, police officers gracefully direct cars with hand signals.",
     mediaType: "video",
-    videoUrl: "https://www.instagram.com/share/BAMcdSym7F"
+    videoUrl: "https://www.instagram.com/reel/DGhfZ-aPdNq/"
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ const highlights = [
     image: "/images/highlights/tigers-nest.jpg",
     description: "The Taktsang Monastery, or Tiger's Nest, clings to a cliff 3,000 feet above the Paro Valley. The hike to this sacred site is a must-do and offers some of the most magical views in Bhutan.",
     mediaType: "video",
-    videoUrl: "https://www.instagram.com/share/BAGSuJabdV"
+    videoUrl: "https://www.instagram.com/reel/DGsvYCWvWrq/"
   },
   {
     id: 7,
