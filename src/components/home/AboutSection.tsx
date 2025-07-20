@@ -24,7 +24,8 @@ export const AboutSection = () => {
           >
             <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/images/about/bhutan-team.jpg"
+                src="/images/about/bhutan-team.jpg
+"
                 alt="We Go Authentic Team"
                 fill
                 className="object-cover"
