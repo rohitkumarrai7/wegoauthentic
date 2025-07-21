@@ -36,7 +36,7 @@ const highlights = [
     image: "/images/highlights/no-traffic-lights.jpg",
     description: "Bhutan's capital, Thimphu, is one of the only capitals in the world without a single traffic light. Instead, police officers gracefully direct cars with hand signals.",
     mediaType: "video",
-    videoUrl: "https://www.instagram.com/reel/DGhfZ-aPdNq/?igsh=QkJQeGhjb3FObQ%3D%3D"
+    videoUrl: "https://www.instagram.com/reel/DGhfZ-aPdNq/"
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ const highlights = [
     image: "/images/highlights/tigers-nest.jpg",
     description: "The Taktsang Monastery, or Tiger's Nest, clings to a cliff 3,000 feet above the Paro Valley. The hike to this sacred site is a must-do and offers some of the most magical views in Bhutan.",
     mediaType: "video",
-    videoUrl: "https://www.instagram.com/reel/DGsvYCWvWrq/?igsh=QkFEVlh4M09BMg%3D%3D"
+    videoUrl: "https://www.instagram.com/reel/DGsvYCWvWrq/#"
   },
   {
     id: 7,
@@ -138,36 +138,21 @@ export const WhyBhutanSection = () => {
                             priority={highlight.id <= 2}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             placeholder="blur"
-                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUVX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                           />
-                          {highlight.mediaType === "video" && (
-                            <Dialog>
-                              <DialogTrigger asChild>
-                                <button className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/50 rounded-lg">
-                                  <div className="rounded-full bg-bhutan-red h-12 w-12 flex items-center justify-center transform transition-transform group-hover:scale-110">
-                                    <FiPlay className="text-white text-xl" />
-                                  </div>
-                                </button>
-                              </DialogTrigger>
-                              <DialogContent className="sm:max-w-[725px]">
-                                <DialogHeader>
-                                  <DialogTitle>{highlight.title}</DialogTitle>
-                                </DialogHeader>
-                                <div className="aspect-video w-full">
-                                  <iframe
-                                    width="100%"
-                                    height="100%"
-                                    src={highlight.videoUrl}
-                                    title={highlight.title}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                    className="w-full h-full rounded-lg"
-                                  ></iframe>
-                                </div>
-                              </DialogContent>
-                            </Dialog>
-                          )}
+                          {highlight.mediaType === "video" && highlight.videoUrl ? (
+                            <a
+                              href={highlight.videoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity hover:bg-black/50 rounded-lg"
+                              aria-label={`Watch ${highlight.title} on Instagram`}
+                            >
+                              <div className="rounded-full bg-bhutan-red h-12 w-12 flex items-center justify-center transform transition-transform group-hover:scale-110">
+                                <FiPlay className="text-white text-xl" />
+                              </div>
+                            </a>
+                          ) : null}
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
                           <h3 className="font-bold text-lg text-bhutan-dark mb-2 group-hover:text-bhutan-red transition-colors duration-300">{highlight.title}</h3>
