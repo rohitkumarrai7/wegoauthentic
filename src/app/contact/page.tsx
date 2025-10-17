@@ -1,3 +1,5 @@
+"use client";
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -5,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { FiMail, FiPhone, FiInstagram, FiYoutube } from 'react-icons/fi';
 import Link from 'next/link';
 import * as React from "react";
+import { useState } from 'react';
 
 import { cn } from "@/lib/utils";
 
@@ -30,6 +33,53 @@ Textarea.displayName = "Textarea";
 export { Textarea };
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    tripType: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    try {
+      // In a real app, you'd send to an API endpoint
+      console.log('Form submitted:', formData);
+
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        tripType: '',
+        message: ''
+      });
+    } catch (error) {
+      setSubmitMessage('Something went wrong. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       {/* Banner */}
@@ -62,12 +112,21 @@ export default function Contact() {
                 Fill out the form below and we&apos;ll get back to you as soon as possible to help plan your Bhutan journey.
               </p>
 
-              <form className="space-y-6">
+              {submitMessage && (
+                <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800">
+                  {submitMessage}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
                       id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
                       placeholder="Your first name"
                       required
                     />
@@ -76,6 +135,9 @@ export default function Contact() {
                     <Label htmlFor="lastName">Last Name</Label>
                     <Input
                       id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
                       placeholder="Your last name"
                       required
                     />
@@ -86,6 +148,9 @@ export default function Contact() {
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     type="email"
                     placeholder="Your email address"
                     required
@@ -96,6 +161,9 @@ export default function Contact() {
                   <Label htmlFor="phone">Phone Number</Label>
                   <Input
                     id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     type="tel"
                     placeholder="Your phone number"
                   />
@@ -105,6 +173,9 @@ export default function Contact() {
                   <Label htmlFor="tripType">Interested In</Label>
                   <select
                     id="tripType"
+                    name="tripType"
+                    value={formData.tripType}
+                    onChange={handleChange}
                     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-bhutan-red/50"
                   >
                     <option value="">Select a trip type</option>
@@ -120,6 +191,9 @@ export default function Contact() {
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={5}
                     placeholder="Tell us about your travel plans, questions, or special requirements"
                     required
@@ -128,9 +202,10 @@ export default function Contact() {
 
                 <Button
                   type="submit"
-                  className="w-full bg-bhutan-red text-white hover:bg-bhutan-red/90"
+                  disabled={isSubmitting}
+                  className="w-full bg-bhutan-red text-white hover:bg-bhutan-red/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </div>

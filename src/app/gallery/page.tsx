@@ -15,13 +15,13 @@ const blurDataURL = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUND
 
 const galleryImages = {
   nature: [
-    { id: 1, src: '/images/gallery/nature/nature-1.png', alt: 'Lush green valleys of Bhutan' },
+    { id: 1, src: '/images/gallery/nature/nature-1.jpg', alt: 'Lush green valleys of Bhutan' },
     { id: 2, src: '/images/gallery/nature/nature-2.jpg', alt: 'Himalayan mountains in Bhutan' },
-    { id: 3, src: '/images/gallery/nature/nature-3.png', alt: 'Alpine forests in Bhutan' },
+    { id: 3, src: '/images/gallery/nature/nature-3.jpg', alt: 'Alpine forests in Bhutan' },
     { id: 4, src: '/images/gallery/nature/nature-4.jpg', alt: 'Clear mountain rivers in Bhutan' },
-    { id: 5, src: '/images/gallery/nature/nature-5.png', alt: 'Scenic landscapes of Bhutan' },
-    { id: 6, src: '/images/gallery/nature/nature-6.png', alt: 'Phobjikha Valley in Bhutan' },
-    { id: 7, src: '/images/gallery/nature/nature-7.png', alt: 'Mountain views in Bhutan' },
+    { id: 5, src: '/images/gallery/nature/nature-5.jpg', alt: 'Scenic landscapes of Bhutan' },
+    { id: 6, src: '/images/gallery/nature/nature-6.jpg', alt: 'Phobjikha Valley in Bhutan' },
+    { id: 7, src: '/images/gallery/nature/nature-7.jpg', alt: 'Mountain views in Bhutan' },
     { id: 8, src: '/images/gallery/nature/nature-8.jpg', alt: 'Traditional farming in Bhutan' },
   ],
   festivals: [
@@ -35,8 +35,8 @@ const galleryImages = {
     { id: 8, src: '/images/gallery/festivals/festival-8.jpg', alt: 'Traditional Bhutanese festival' },
   ],
   groups: [
-    { id: 1, src: 'https://assets.onecompiler.app/42vvzq69s/42y6f786y/group-1.jpg', alt: 'Group trip to Tigers Nest' },
-    { id: 2, src: 'https://assets.onecompiler.app/42vvzq69s/42y6f786y/group-2.jpg', alt: 'Group exploring Bhutanese culture' },
+    { id: 1, src: '/images/gallery/groups/group-1.jpg', alt: 'Group trip to Tigers Nest' },
+    { id: 2, src: '/images/gallery/groups/group-2.jpg', alt: 'Group exploring Bhutanese culture' },
     { id: 3, src: '/images/gallery/groups/group-3.jpg', alt: 'Group at traditional festival' },
     { id: 4, src: '/images/gallery/groups/group-4.jpg', alt: 'Group hiking experience' },
     { id: 5, src: '/images/gallery/groups/group-5.jpg', alt: 'Group cultural immersion' },
@@ -46,12 +46,13 @@ const galleryImages = {
   ],
   adventures: [
     { id: 1, src: '/images/gallery/adventures/adventure-1.jpg', alt: "Tiger's Nest hike in Bhutan" },
-    { id: 2, src: '/images/gallery/adventures/adventure-2.png', alt: 'River rafting in Bhutan' },
-    { id: 3, src: '/images/gallery/adventures/adventure-3.png', alt: 'Mountain biking in Bhutan' },
+    { id: 2, src: '/images/gallery/adventures/adventure-2.jpg', alt: 'River rafting in Bhutan' },
+    { id: 3, src: '/images/gallery/adventures/adventure-3.jpg', alt: 'Mountain biking in Bhutan' },
     { id: 4, src: '/images/gallery/adventures/adventure-4.jpg', alt: 'Trekking in Bhutan' },
-    { id: 5, src: '/images/gallery/adventures/adventure-5.png', alt: 'Adventure camping in Bhutan' },
-    { id: 6, src: '/images/gallery/adventures/adventure-6.png', alt: 'Hiking to remote monasteries' },
-    { id: 7, src: '/images/gallery/adventures/adventure-7.png', alt: 'Hot stone bath experience' },
+    { id: 5, src: '/images/gallery/adventures/adventure-5.jpg', alt: 'Adventure camping in Bhutan' },
+    { id: 6, src: '/images/gallery/adventures/adventure-6.jpg', alt: 'Hiking to remote monasteries' },
+    { id: 7, src: '/images/gallery/adventures/adventure-7.jpg', alt: 'Hot stone bath experience' },
+    { id: 8, src: '/images/gallery/adventures/adventure-8.jpg', alt: 'Adventure activities in Bhutan' },
   ],
 };
 
@@ -108,8 +109,8 @@ export default function Gallery() {
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="object-cover hover:scale-105 transition-transform duration-300"
-                        quality={65}
-                        loading={index < 8 ? "eager" : "lazy"}
+                        quality={75}
+                        loading={index < 4 ? "eager" : "lazy"}
                         placeholder="blur"
                         blurDataURL={blurDataURL}
                       />

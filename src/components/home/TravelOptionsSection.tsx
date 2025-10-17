@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
+import { OptimizedImage } from '@/components/ui/optimized-image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
@@ -29,23 +29,25 @@ const PrivateTripsSection = () => {
 
   return (
     <motion.div
-      className="bg-white rounded-lg shadow-lg overflow-hidden"
+      className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
       initial={{ opacity: 0, x: 20 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
+      whileHover={{
+        scale: 1.02,
+        y: -5,
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      }}
     >
       <div className="relative h-[300px]">
-        <Image
+        <OptimizedImage
           src="/images/trips/private-trip.jpg"
           alt="Private Trip"
           fill
-          className="object-cover"
+          quality={80}
           sizes="(max-width: 768px) 100vw, 50vw"
-          quality={75}
-          loading="lazy"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col items-center justify-end p-4 md:p-6">
           <h3 className="text-2xl font-bold text-white mb-2">Private Trips</h3>
@@ -95,41 +97,101 @@ const PrivateTripsSection = () => {
 };
 
 export const TravelOptionsSection = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: {
+      opacity: 0,
+      y: 80,
+      rotateX: -30,
+      scale: 0.8
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 80
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 100, rotateY: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateY: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
   return (
-    <section id="travel-options" className="py-16 md:py-24 bg-white">
+    <motion.section
+      id="travel-options"
+      className="py-16 md:py-24 bg-white"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-12"
+          variants={headerVariants}
+        >
           <motion.h2
             className="text-3xl md:text-4xl font-bold text-bhutan-dark mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            animate={{
+              textShadow: [
+                "0 0 10px rgba(0,0,0,0.1)",
+                "0 0 20px rgba(0,0,0,0.2)",
+                "0 0 10px rgba(0,0,0,0.1)"
+              ]
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           >
             How Can You Travel With Us?
           </motion.h2>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Group Trips */}
           <motion.div
-            className="bg-white rounded-lg shadow-lg overflow-hidden"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+            variants={cardVariants}
+            whileHover={{
+              scale: 1.02,
+              y: -5,
+              transition: { type: "spring", stiffness: 300, damping: 20 }
+            }}
           >
             <div className="relative h-[300px]">
-              <Image
+              <OptimizedImage
                 src="/images/trips/group-trip.jpg"
                 alt="Group Trip"
                 fill
-                className="object-cover"
+                quality={80}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                quality={75}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRUVFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBohHh4hIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col items-center justify-end p-6 text-white">
                 <h3 className="text-2xl font-bold mb-2">Group Trips</h3>
@@ -167,9 +229,11 @@ export const TravelOptionsSection = () => {
           </motion.div>
 
           {/* Private Trips */}
-          <PrivateTripsSection />
+          <motion.div variants={cardVariants}>
+            <PrivateTripsSection />
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

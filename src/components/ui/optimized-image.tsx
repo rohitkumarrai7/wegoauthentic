@@ -36,40 +36,26 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-    if (onLoadingComplete) {
-      onLoadingComplete();
-    }
-  };
-
   return (
-    <div className={cn('relative overflow-hidden', className)}>
-      {isLoading && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      fill={fill}
+      className={cn(
+        objectFit === 'cover' ? 'object-cover' :
+        objectFit === 'contain' ? 'object-contain' :
+        objectFit === 'fill' ? 'object-fill' :
+        objectFit === 'none' ? 'object-none' :
+        'object-scale-down'
       )}
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        fill={fill}
-        className={cn(
-          'transition-opacity duration-300',
-          isLoading ? 'opacity-0' : 'opacity-100',
-          objectFit === 'cover' ? 'object-cover' : 
-          objectFit === 'contain' ? 'object-contain' : 
-          objectFit === 'fill' ? 'object-fill' : 
-          objectFit === 'none' ? 'object-none' : 
-          'object-scale-down'
-        )}
-        priority={priority}
-        quality={quality}
-        sizes={sizes}
-        placeholder="blur"
-        blurDataURL={blurDataURL}
-        onLoadingComplete={handleLoadingComplete}
-      />
-    </div>
+      priority={priority}
+      quality={quality}
+      sizes={sizes}
+      placeholder="blur"
+      blurDataURL={blurDataURL}
+      onLoad={onLoadingComplete}
+    />
   );
-}; 
+};
